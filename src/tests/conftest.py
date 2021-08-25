@@ -67,12 +67,12 @@ def turkund_provider(tesla_ce_base_provider):
 @pytest.fixture
 def mock_urkund_lib_all_ok(mocker, turkund_provider):
     mock_module = {
-        'Id': 33,
+        'Id': 1,
         'Name': 'TeSLA CE Institution Test',
         'Suffix': '.uoc@analysis.urkund.com',
         'DateCreated': '12/18/2021 11:54:00 AM',
         'Organizations': [
-            {'Id': 62, 'Name': "TeSLA CE Test", 'SubOrganizations': []}
+            {'Id': 1, 'Name': "TeSLA CE Test", 'SubOrganizations': []}
         ],
         'MOCKED': True
     }
@@ -84,8 +84,8 @@ def mock_urkund_lib_all_ok(mocker, turkund_provider):
         'EmailAddress': 'rmunozber@uoc.edu',
         'FullName': 'Roger John Doe',
         'Language': 'EN ',
-        'UnitId': 33,
-        'Organization': {'Id': 62, 'Name': 'Estudis', 'SubOrganizations': None},
+        'UnitId': 1,
+        'Organization': {'Id': 1, 'Name': 'Estudis', 'SubOrganizations': None},
         'SubOrganization': None,
         'MOCKED': True
     }
