@@ -1,0 +1,51 @@
+import os
+import setuptools
+
+try:
+    from sphinx.setup_command import BuildDoc
+except ImportError:
+    BuildDoc = None
+
+with open(os.path.abspath(os.path.join(os.path.dirname(__file__), 'README.md')), "r") as fh:
+    long_description = fh.read()
+
+with open(os.path.abspath(os.path.join(os.path.dirname(__file__), 'requirements.txt')), "r") as fh:
+    requirements_raw = fh.read()
+    requirements_list = requirements_raw.split('\n')
+    requirements = []
+    for req in requirements_list:
+        if not req.strip().startswith('#') and len(req.strip()) > 0:
+            requirements.append(req)
+
+with open(os.path.abspath(os.path.join(os.path.dirname(__file__), "src/turkund/data/VERSION")), "r") as fh:
+    version = fh.read()
+
+setuptools.setup(
+    name="tesla-ce-provider-turkund",
+    version=version,
+    author="Roger Muñoz Bernaus",
+    author_email="rmunozber@uoc.edu",
+    description="TeSLA CE Urkund Plagiarism Provider",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://git.sunai.uoc.edu/tesla-ce/providers/urkund",
+    packages=setuptools.find_packages('src', exclude='__pycache__'),
+    package_dir={'': 'src'},  # tell distutils packages are under src
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+        "Operating System :: POSIX :: Linux",
+    ],
+    python_requires='>=3.6',
+    package_data={
+        '': ['*.cfg', 'VERSION'],
+        'tfr': [
+            'data/*',
+                    ],
+    },
+    include_package_data=True,
+    install_requires=requirements,
+    cmdclass={
+        'build_sphinx': BuildDoc
+    }
+)

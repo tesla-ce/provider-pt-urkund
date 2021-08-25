@@ -1,0 +1,35 @@
+version: '3.5'
+services:
+  turkund_provider:
+    image: teslace/provider-pt-urkund:edge
+    deploy:
+      restart_policy:
+        condition: on-failure
+      replicas: 1
+    environment:
+      ROLE_ID_FILE: "/run/secrets/ROLE_ID"
+      SECRET_ID_FILE: "/run/secrets/SECRET_ID"
+      URKUND_USER: "URKUND_USER"
+      URKUND_PASSWORD: "URKUND_PASSWORD"
+      URKUND_ORGANIZATION: "URKUND_ORGANIZATION"
+      URKUND_SUBORGANIZATION: "URKUND_SUBORGANIZATION"
+      URKUND_UNIT: "URKUND_UNIT"
+      URKUND_DEFAULT_EMAIL_RECEIVER: "URKUND_DEFAULT_EMAIL_RECEIVER@tesla-ce.eu"
+      API_URL: "https://tesla-ce.eu"
+    secrets:
+      - source: TURKUND_ROLE_ID
+        target: ROLE_ID
+      - source: TURKUND_SECRET_ID
+        target: SECRET_ID
+
+secrets:
+  TURKUND_ROLE_ID:
+    file: ./secrets/TURKUND_ROLE_ID
+  TURKUND_SECRET_ID:
+    file: ./secrets/TURKUND_SECRET_ID
+
+networks:
+  tesla_public:
+    external: true
+  tesla_private:
+    external: true
