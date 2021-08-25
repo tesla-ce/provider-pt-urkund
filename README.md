@@ -1,10 +1,9 @@
-[![PyPi Version](https://img.shields.io/pypi/v/tesla-ce.svg)](https://pypi.python.org/pypi/tesla-ce/)
+[![PyPi Version](https://img.shields.io/pypi/v/tesla-ce-provider-pt-urkund.svg)](https://pypi.python.org/pypi/tesla-ce-provider-pt-urkund/)
 [![codecov](https://codecov.io/gh/tesla-ce/provider-pt-urkund/branch/main/graph/badge.svg?token=PJJQMW981P)](https://codecov.io/gh/tesla-ce/provider-pt-urkund)
-[![Vulnerability scan](https://github.com/tesla-ce/provider-pt-urkund/actions/workflows/debricked.yml/badge.svg)](https://github.com/tesla-ce/provider-pt-urkund/actions/workflows/debricked.yml)
-[![CodeQL](https://github.com/tesla-ce/provider-pt-urkund/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/tesla-ce/provider-pt-urkund/actions/workflows/codeql-analysis.yml)
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Fprovider-pt-urkund.svg?type=shield)](https://app.fossa.com/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Fprovider-pt-urkund?ref=badge_shield)
-[![Quality gate](https://sonar.sunai.uoc.edu/api/project_badges/quality_gate?project=tesla-ce_core)](https://sonar.sunai.uoc.edu/dashboard?id=tesla-ce_core)
+[![Quality gate](https://sonar.sunai.uoc.edu/api/project_badges/quality_gate?project=tesla-ce_provider-pt-urkund)](https://sonar.sunai.uoc.edu/dashboard?id=tesla-ce_provider-pt-urkund)
+
 
 # TeSLA CE Plagiarism Tool based on URKUND
 
