@@ -187,7 +187,7 @@ jobs:
         run: |
           # Build requirements
           python -m pip install --upgrade pip
-          python -m pip install pip-tools wheel
+          python -m pip install pip-tools wheel testresources
           pip-compile
           # Set the version
           echo '${{ steps.vars.outputs.version }}' > src/turkund/data/VERSION
