@@ -74,8 +74,8 @@ jobs:
         env:
           URKUND_USER: URKUND_USER_TEST
           URKUND_PASSWORD: URKUND_PASSWORD_TEST
-          URKUND_ORGANIZATION: URKUND_ORGANIZATION_TEST
-          URKUND_UNIT: URKUND_UNIT_TEST
+          URKUND_ORGANIZATION: 1
+          URKUND_UNIT: 1
           URKUND_DEFAULT_EMAIL_RECEIVER: URKUND_DEFAULT_EMAIL_RECEIVER@tesla-ce.eu
       - name: "Upload coverage to Codecov"
         uses: codecov/codecov-action@v1.5.0
