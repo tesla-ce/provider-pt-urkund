@@ -29,4 +29,3 @@ Credits: Include a section for credits in order to highlight and link to the aut
 This project is licensed under [AGPL v3 licence](http://www.gnu.org/licenses/agpl-3.0).
 
 [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Fprovider-pt-urkund.svg?type=large)](https://app.fossa.com/projects/custom%2B26246%2Fgithub.com%2Ftesla-ce%2Fprovider-pt-urkund?ref=badge_large)
-
