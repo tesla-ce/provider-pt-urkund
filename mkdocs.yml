@@ -1,0 +1,36 @@
+site_name: TeSLA Plagiarism Tools base on URKUND
+site_url: https://tesla-ce.github.io/provider-pt-urkund/
+site_author: Roger Munoz
+
+nav:
+    - Home: index.md
+    - Options: options.md
+
+theme:
+  name: "material"
+  custom_dir: overrides
+
+markdown_extensions:
+  - admonition
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          setup_commands:
+            - import sys
+            - sys.path.insert(0, "src")
+            - print('INITIALIZED')
+          rendering:
+            show_source: true
+          selection:
+            docstring_style: restructured-text
+      watch:
+        - src/turkund
+extra:
+  version:
+    provider: mike
+
