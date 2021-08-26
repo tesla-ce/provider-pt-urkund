@@ -91,10 +91,10 @@ jobs:
           # Generate XML report
           coverage xml
           # Replace the file paths to fit with source paths instead of installed package paths
-          sed -i 's+${{ env.LD_LIBRARY_PATH }}/python${{ matrix.python-version }}/site-packages/turkund-${{ steps.vars.outputs.version }}-py${{ matrix.python-version }}.egg+src+g' coverage.xml
+          sed -i 's+${{ env.LD_LIBRARY_PATH }}/python${{ matrix.python-version }}/site-packages/urkund-${{ steps.vars.outputs.version }}-py${{ matrix.python-version }}.egg+src+g' coverage.xml
           # Perform PyLint Analysis
           python -m pip install pyflakes pylint
-          pylint --exit-zero --max-line-length=120 src/turkund tests/ -r n --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" | tee pylint.txt
+          pylint --exit-zero --max-line-length=120 src/urkund tests/ -r n --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" | tee pylint.txt
           # Set the current version to SonarQube configuration file
           echo 'sonar.projectVersion=${{ steps.vars.outputs.version }}' >> sonar-project.properties          
       - name: SonarQube analysis
@@ -126,7 +126,7 @@ jobs:
           python -m pip install pip-tools twine
           if [ -f requirements.in ]; then pip-compile; fi
           # Set the version
-          echo '${{ steps.vars.outputs.tag }}' > src/turkund/data/VERSION
+          echo '${{ steps.vars.outputs.tag }}' > src/urkund/data/VERSION
           # Build wheel
           python setup.py sdist bdist_wheel
           # Publish the package
