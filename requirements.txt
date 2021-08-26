@@ -49,7 +49,7 @@ prompt-toolkit==3.0.20
 pyparsing==2.4.7
     # via packaging
 python-magic==0.4.22
-    # via tesla-ce-provider-turkund (setup.py)
+    # via tesla-ce-provider-urkund (setup.py)
 pytz==2021.1
     # via celery
 requests==2.26.0
@@ -67,7 +67,7 @@ six==1.16.0
 tesla-ce-client==0.0.1
     # via tesla-ce-provider
 tesla-ce-provider==0.0.4
-    # via tesla-ce-provider-turkund (setup.py)
+    # via tesla-ce-provider-urkund (setup.py)
 typing-extensions==3.10.0.0
     # via importlib-metadata
 urllib3==1.26.6

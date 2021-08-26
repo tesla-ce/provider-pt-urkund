@@ -52,7 +52,7 @@ RUN set -ex \
             expat
 
 # Prepare environment
-ENV PROVIDER_CLASS=turkund.TUrkundProvider
+ENV PROVIDER_CLASS=urkund.UrkundProvider
 ENV PROVIDER_VERSION=$TESLA_CE_PROVIDER_VERSION
 
 # Create a user and group for Celery

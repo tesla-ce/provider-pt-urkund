@@ -29,7 +29,7 @@ plugins:
           selection:
             docstring_style: restructured-text
       watch:
-        - src/turkund
+        - src/urkund
 extra:
   version:
     provider: mike
