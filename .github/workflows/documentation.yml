@@ -15,7 +15,7 @@ jobs:
       - name: Get version values
         id: vars
         run: |          
-          echo ::set-output name=version::$(cat src/turkund/data/VERSION)
+          echo ::set-output name=version::$(cat src/urkund/data/VERSION)
           echo ::set-output name=tag::${GITHUB_REF#refs/*/}                
       - name: Show captured versions
         run: |
@@ -39,7 +39,7 @@ jobs:
       - name: Get version value
         id: vars
         run: |          
-          echo ::set-output name=version::$(cat src/turkund/data/VERSION)
+          echo ::set-output name=version::$(cat src/urkund/data/VERSION)
       - name: Set up Python
         uses: actions/setup-python@v2
         with:

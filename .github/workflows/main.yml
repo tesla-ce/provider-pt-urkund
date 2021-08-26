@@ -18,7 +18,7 @@ jobs:
       - name: Get version values
         id: vars
         run: |          
-          echo ::set-output name=version::$(cat src/turkund/data/VERSION)
+          echo ::set-output name=version::$(cat src/urkund/data/VERSION)
           echo ::set-output name=tag::${GITHUB_REF#refs/*/}                
       - name: Show captured versions
         run: |
@@ -48,7 +48,7 @@ jobs:
       - name: Get version value
         id: vars
         run: |          
-          echo ::set-output name=version::$(cat src/turkund/data/VERSION)
+          echo ::set-output name=version::$(cat src/urkund/data/VERSION)
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
@@ -70,7 +70,7 @@ jobs:
           python setup.py install
       - name: Test with pytest
         run: |        
-          pytest --cov=turkund
+          pytest --cov=urkund
         env:
           URKUND_USER: URKUND_USER_TEST
           URKUND_PASSWORD: URKUND_PASSWORD_TEST
@@ -175,7 +175,7 @@ jobs:
       - name: Store version
         id: vars
         run: |
-          echo ::set-output name=version::$(cat src/turkund/data/VERSION)
+          echo ::set-output name=version::$(cat src/urkund/data/VERSION)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
@@ -190,7 +190,7 @@ jobs:
           python -m pip install pip-tools wheel testresources
           pip-compile
           # Set the version
-          echo '${{ steps.vars.outputs.version }}' > src/turkund/data/VERSION
+          echo '${{ steps.vars.outputs.version }}' > src/urkund/data/VERSION
           # Build wheel
           python setup.py bdist_wheel
           # Build and publish
