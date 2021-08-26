@@ -28,7 +28,11 @@ setuptools.setup(
     description="TeSLA CE Urkund Plagiarism Provider",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/tesla-ce/provider-pt-urkund",
+    url="https://tesla-ce.github.io",
+    project_urls={
+        'Documentation': 'https://tesla-ce.github.io/provider-pt-urkund/',
+        'Source': 'https://github.com/tesla-ce/provider-pt-urkund',
+    },
     packages=setuptools.find_packages('src', exclude='__pycache__'),
     package_dir={'': 'src'},  # tell distutils packages are under src
     classifiers=[
