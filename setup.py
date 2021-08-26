@@ -1,10 +1,6 @@
 import os
 import setuptools
 
-try:
-    from sphinx.setup_command import BuildDoc
-except ImportError:
-    BuildDoc = None
 
 with open(os.path.abspath(os.path.join(os.path.dirname(__file__), 'README.md')), "r") as fh:
     long_description = fh.read()
@@ -21,7 +17,7 @@ with open(os.path.abspath(os.path.join(os.path.dirname(__file__), "src/urkund/da
     version = fh.read()
 
 setuptools.setup(
-    name="tesla-ce-provider-urkund",
+    name="tesla-ce-provider-pt-urkund",
     version=version,
     author="Roger Muñoz Bernaus",
     author_email="rmunozber@uoc.edu",
@@ -48,8 +44,5 @@ setuptools.setup(
                     ],
     },
     include_package_data=True,
-    install_requires=requirements,
-    cmdclass={
-        'build_sphinx': BuildDoc
-    }
+    install_requires=requirements
 )
