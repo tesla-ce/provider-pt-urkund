@@ -1,7 +1,7 @@
 name: Build Documentation
 on:
   push:
-    branches: [ gh-docs  ]
+    branches: [ main ]
   release:
     types: 
       - created
