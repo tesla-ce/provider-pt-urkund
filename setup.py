@@ -17,18 +17,18 @@ with open(os.path.abspath(os.path.join(os.path.dirname(__file__), 'requirements.
         if not req.strip().startswith('#') and len(req.strip()) > 0:
             requirements.append(req)
 
-with open(os.path.abspath(os.path.join(os.path.dirname(__file__), "src/turkund/data/VERSION")), "r") as fh:
+with open(os.path.abspath(os.path.join(os.path.dirname(__file__), "src/urkund/data/VERSION")), "r") as fh:
     version = fh.read()
 
 setuptools.setup(
-    name="tesla-ce-provider-turkund",
+    name="tesla-ce-provider-urkund",
     version=version,
     author="Roger Muñoz Bernaus",
     author_email="rmunozber@uoc.edu",
     description="TeSLA CE Urkund Plagiarism Provider",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://git.sunai.uoc.edu/tesla-ce/providers/urkund",
+    url="https://github.com/tesla-ce/provider-pt-urkund",
     packages=setuptools.find_packages('src', exclude='__pycache__'),
     package_dir={'': 'src'},  # tell distutils packages are under src
     classifiers=[
@@ -39,7 +39,7 @@ setuptools.setup(
     python_requires='>=3.6',
     package_data={
         '': ['*.cfg', 'VERSION'],
-        'tfr': [
+        'urkund': [
             'data/*',
                     ],
     },

@@ -23,7 +23,7 @@ from ..urkund_lib import UrkundLib
 from ..urkund_lib.exceptions import BaseUrkundLibException, MediaTypeNotSupported, RequestTooLarge, BadRequest, Timeout
 
 
-class TUrkundProvider(BaseProvider):
+class UrkundProvider(BaseProvider):
     """
         TeSLA Face Recognition implementation
     """

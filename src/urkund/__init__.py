@@ -13,6 +13,6 @@
 #      You should have received a copy of the GNU Affero General Public License
 #      along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """ TeSLA CE Urkund package """
-from .provider import TUrkundProvider
+from .provider import UrkundProvider
 
-__all__ = ["TUrkundProvider"]
+__all__ = ["UrkundProvider"]

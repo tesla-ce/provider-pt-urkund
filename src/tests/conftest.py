@@ -21,7 +21,7 @@ import os
 @pytest.fixture
 def tesla_ce_provider_conf():
     return {
-        'provider_class': 'turkund.TUrkundProvider',
+        'provider_class': 'urkund.UrkundProvider',
         'provider_desc_file': None,
         'instrument': None,
         'info': None
@@ -29,11 +29,11 @@ def tesla_ce_provider_conf():
 
 
 @pytest.fixture
-def turkund_provider(tesla_ce_base_provider):
-    from turkund import TUrkundProvider
-    assert isinstance(tesla_ce_base_provider, TUrkundProvider)
+def urkund_provider(tesla_ce_base_provider):
+    from urkund import UrkundProvider
+    assert isinstance(tesla_ce_base_provider, UrkundProvider)
 
-    logger = getLogger('turkund Tests')
+    logger = getLogger('urkund Tests')
     tesla_ce_base_provider.set_logger(logger.info)
 
     urkund_user = os.getenv('URKUND_USER', None)
@@ -65,7 +65,7 @@ def turkund_provider(tesla_ce_base_provider):
 
 
 @pytest.fixture
-def mock_urkund_lib_all_ok(mocker, turkund_provider):
+def mock_urkund_lib_all_ok(mocker, urkund_provider):
     mock_module = {
         'Id': 1,
         'Name': 'TeSLA CE Institution Test',
@@ -76,7 +76,7 @@ def mock_urkund_lib_all_ok(mocker, turkund_provider):
         ],
         'MOCKED': True
     }
-    mocker.patch('turkund.urkund_lib.units.Units.get', return_value=mock_module)
+    mocker.patch('urkund.urkund_lib.units.Units.get', return_value=mock_module)
 
     mock_module = {
         'Id': 414194,
@@ -90,7 +90,7 @@ def mock_urkund_lib_all_ok(mocker, turkund_provider):
         'MOCKED': True
     }
 
-    mocker.patch('turkund.urkund_lib.receivers.Receivers.get', return_value=mock_module)
+    mocker.patch('urkund.urkund_lib.receivers.Receivers.get', return_value=mock_module)
 
     mock_module = {
         'Id': 72565518,
@@ -108,7 +108,7 @@ def mock_urkund_lib_all_ok(mocker, turkund_provider):
         'MOCKED': True
     }
 
-    mocker.patch('turkund.urkund_lib.submissions.Submissions.send', return_value=mock_module)
+    mocker.patch('urkund.urkund_lib.submissions.Submissions.send', return_value=mock_module)
 
     mock_module = [{
         'Id': 72565518,
@@ -144,4 +144,4 @@ def mock_urkund_lib_all_ok(mocker, turkund_provider):
         'MOCKED': True
     }]
 
-    mocker.patch('turkund.urkund_lib.submissions.Submissions.result', return_value=mock_module)
+    mocker.patch('urkund.urkund_lib.submissions.Submissions.result', return_value=mock_module)

@@ -16,40 +16,40 @@
 from .utils import get_request
 
 
-def test_send_zip_filename(mock_urkund_lib_all_ok, turkund_provider):
+def test_send_zip_filename(mock_urkund_lib_all_ok, urkund_provider):
     filename = 'valid/lorem.txt.zip'
     sample = get_request(filename=filename, mimetype='application/zip')
 
     model = {}
-    response = turkund_provider.verify(sample, model)
+    response = urkund_provider.verify(sample, model)
 
     from tesla_provider import result
     assert isinstance(response, result.VerificationDelayedResult)
 
 
-def test_send_zip_filename(mock_urkund_lib_all_ok, turkund_provider):
+def test_send_zip_filename(mock_urkund_lib_all_ok, urkund_provider):
     filename = 'valid/lorem.txt.zip'
     sample = get_request(filename=filename, mimetype='application/zip')
 
     model = {}
-    response = turkund_provider.verify(sample, model)
+    response = urkund_provider.verify(sample, model)
 
     from tesla_ce_provider import result
     assert isinstance(response, result.VerificationDelayedResult)
 
 
-def test_send_txt_filename(mock_urkund_lib_all_ok, turkund_provider):
+def test_send_txt_filename(mock_urkund_lib_all_ok, urkund_provider):
     filename = 'valid/lorem.txt'
     sample = get_request(filename=filename, mimetype='text/plain')
 
     model = {}
-    response = turkund_provider.verify(sample, model)
+    response = urkund_provider.verify(sample, model)
 
     from tesla_ce_provider import result
     assert isinstance(response, result.VerificationDelayedResult)
 
 
-def test_verify_txt_filename(mock_urkund_lib_all_ok, turkund_provider):
+def test_verify_txt_filename(mock_urkund_lib_all_ok, urkund_provider):
     key = 'tukrund_check_data'
     info = {
         'request_id': '',
@@ -68,6 +68,6 @@ def test_verify_txt_filename(mock_urkund_lib_all_ok, turkund_provider):
         'total_files': 1
     }
 
-    result = turkund_provider.on_notification(key, info)
+    result = urkund_provider.on_notification(key, info)
 
     assert result is None
