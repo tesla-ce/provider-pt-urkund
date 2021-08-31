@@ -17,6 +17,12 @@ from .utils import get_request
 
 
 def test_send_zip_filename(mock_urkund_lib_all_ok, urkund_provider):
+    '''
+    Test send zip filename
+    :param mock_urkund_lib_all_ok:
+    :param urkund_provider:
+    :return:
+    '''
     filename = 'valid/lorem.txt.zip'
     sample = get_request(filename=filename, mimetype='application/zip')
 
@@ -28,6 +34,12 @@ def test_send_zip_filename(mock_urkund_lib_all_ok, urkund_provider):
 
 
 def test_send_zip_filename(mock_urkund_lib_all_ok, urkund_provider):
+    '''
+    Test send zip filename
+    :param mock_urkund_lib_all_ok:
+    :param urkund_provider:
+    :return:
+    '''
     filename = 'valid/lorem.txt.zip'
     sample = get_request(filename=filename, mimetype='application/zip')
 
@@ -39,6 +51,12 @@ def test_send_zip_filename(mock_urkund_lib_all_ok, urkund_provider):
 
 
 def test_send_txt_filename(mock_urkund_lib_all_ok, urkund_provider):
+    '''
+    Test send TXT filename
+    :param mock_urkund_lib_all_ok:
+    :param urkund_provider:
+    :return:
+    '''
     filename = 'valid/lorem.txt'
     sample = get_request(filename=filename, mimetype='text/plain')
 
@@ -50,6 +68,12 @@ def test_send_txt_filename(mock_urkund_lib_all_ok, urkund_provider):
 
 
 def test_verify_txt_filename(mock_urkund_lib_all_ok, urkund_provider):
+    '''
+    Test verify txt filename
+    :param mock_urkund_lib_all_ok:
+    :param urkund_provider:
+    :return:
+    '''
     key = 'tukrund_check_data'
     info = {
         'request_id': '',

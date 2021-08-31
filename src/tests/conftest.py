@@ -13,13 +13,17 @@
 #      You should have received a copy of the GNU Affero General Public License
 #      along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """ Test fixtures module """
-import pytest
 from logging import getLogger
 import os
+import pytest
 
 
 @pytest.fixture
 def tesla_ce_provider_conf():
+    '''
+    TeSLACE provider conf fixture
+    :return:
+    '''
     return {
         'provider_class': 'urkund.UrkundProvider',
         'provider_desc_file': None,
@@ -30,6 +34,11 @@ def tesla_ce_provider_conf():
 
 @pytest.fixture
 def urkund_provider(tesla_ce_base_provider):
+    '''
+    Urkund Provider Fixture
+    :param tesla_ce_base_provider:
+    :return:
+    '''
     from urkund import UrkundProvider
     assert isinstance(tesla_ce_base_provider, UrkundProvider)
 
@@ -66,6 +75,12 @@ def urkund_provider(tesla_ce_base_provider):
 
 @pytest.fixture
 def mock_urkund_lib_all_ok(mocker, urkund_provider):
+    """
+    Mocker urkund lib all methods ok
+    :param mocker:
+    :param urkund_provider:
+    :return:
+    """
     mock_module = {
         'Id': 1,
         'Name': 'TeSLA CE Institution Test',
@@ -127,7 +142,17 @@ def mock_urkund_lib_all_ok(mocker, urkund_provider):
             'DownloadUrl': 'https://secure.urkund.com/archive/download?c1=92305055&amp;c2=676372&amp;c3=525345',
             'OptOutInfo': {
                 'Url': 'https://secure.urkund.com/account/document/exemptionstatus/92305055-676372-525345',
-                'Message': 'As the author of the document you have submitted, it is within your right to hide the text content from being viewed by other educational organisations. Note that by hiding the text content, you will not delete the document. The document will remain stored and checked against internal and external sources and forwarded to your tutor along with a plagiarism report. The text content might also be visible within your educational organisation, depending on their preferred settings. However, the text content of the document will not be visible for any user outside your educational organisation.\n\nBear in mind that by hiding your document, it will not be protected against plagiarism. This means that an unauthorised person will be able to make use of your work in the future. If you want to protect your copyright, you should leave it unhidden.\n\nTo hide the text content of your document, click the below link:'}
+                'Message': 'As the author of the document you have submitted, it is within your right to hide '
+                           'the text content from being viewed by other educational organisations. Note that by '
+                           'hiding the text content, you will not delete the document. The document will remain '
+                           'stored and checked against internal and external sources and forwarded to your tutor '
+                           'along with a plagiarism report. The text content might also be visible within your '
+                           'educational organisation, depending on their preferred settings. However, the text '
+                           'content of the document will not be visible for any user outside your educational '
+                           'organisation.\n\nBear in mind that by hiding your document, it will not be protected '
+                           'against plagiarism. This means that an unauthorised person will be able to make use '
+                           'of your work in the future. If you want to protect your copyright, you should leave '
+                           'it unhidden.\n\nTo hide the text content of your document, click the below link:'}
         },
         'Report': {
             'Id': 88349077,

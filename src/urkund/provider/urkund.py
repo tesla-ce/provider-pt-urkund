@@ -132,12 +132,12 @@ class UrkundProvider(BaseProvider):
             "total_files": len(sample_check['tree_file'])
         }
 
-        for f in sample_check['tree_file']:
-            if f['status'] == 'ACCEPTED':
+        for t_file in sample_check['tree_file']:
+            if t_file['status'] == 'ACCEPTED':
                 file = {
-                    "filename": f['filename'],
-                    "mimetype": f['mimetype'],
-                    "content": f['content']
+                    "filename": t_file['filename'],
+                    "mimetype": t_file['mimetype'],
+                    "content": t_file['content']
                 }
                 external_id = "{}_{}".format(request.request_id, idx)
 
@@ -151,7 +151,7 @@ class UrkundProvider(BaseProvider):
                         aux = {
                             "external_id": external_id,
                             "analysis_email": receiver['AnalysisAddress'],
-                            "filename": f['filename']
+                            "filename": t_file['filename']
                         }
                         info['external_ids'].append(aux)
 
@@ -161,7 +161,7 @@ class UrkundProvider(BaseProvider):
 
                         aux = {
                             "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA,
-                            "filename": f['filename'],
+                            "filename": t_file['filename'],
                             "urkund_code": urkund_code,
                             "urkund_message": response['Status']['Message']
                         }
@@ -170,7 +170,7 @@ class UrkundProvider(BaseProvider):
                     else:
                         aux = {
                             "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA,
-                            "filename": f['filename'],
+                            "filename": t_file['filename'],
                             "urkund_code": None,
                             "urkund_message": response['Status']['Message']
                         }
@@ -182,7 +182,7 @@ class UrkundProvider(BaseProvider):
                     if self.config['timeout_retries'] >= self.config['max_timeout_retries']:
                         aux = {
                             "code": message.provider.Provider.PROVIDER_EXTERNAL_SERVICE_TIMEOUT,
-                            "filename": f['filename'],
+                            "filename": t_file['filename'],
                             "urkund_code": None,
                             "urkund_message": None
                         }
@@ -193,7 +193,7 @@ class UrkundProvider(BaseProvider):
                 except MediaTypeNotSupported:
                     aux = {
                         "code": message.provider.Provider.PROVIDER_INVALID_MIMETYPE,
-                        "filename": f['filename'],
+                        "filename": t_file['filename'],
                         "urkund_code": None,
                         "urkund_message": None
                     }
@@ -201,7 +201,7 @@ class UrkundProvider(BaseProvider):
                 except (BadRequest, RequestTooLarge, BaseUrkundLibException):
                     aux = {
                         "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA,
-                        "filename": f['filename'],
+                        "filename": t_file['filename'],
                         "urkund_code": None,
                         "urkund_message": None
                     }
@@ -243,17 +243,17 @@ class UrkundProvider(BaseProvider):
             }
 
             # check for every external_id if Urkund has result
-            for r in info['external_ids']:
-                responses = self._get_urkund_lib().submissions.result(external_id=r['external_id'],
-                                                                      analysis_email=r['analysis_email'])
+            for res in info['external_ids']:
+                responses = self._get_urkund_lib().submissions.result(external_id=res['external_id'],
+                                                                      analysis_email=res['analysis_email'])
 
                 for response in responses:
                     if response['Status']['State'] == 'Analyzed':
                         # return response OK
                         aux = {
-                            "external_id": r['external_id'],
-                            "analysis_email": r['analysis_email'],
-                            "filename": r['filename'],
+                            "external_id": res['external_id'],
+                            "analysis_email": res['analysis_email'],
+                            "filename": res['filename'],
                             "report_url": response['Report']['ReportUrl'],
                             "significance": response['Report']['Significance'],
                             "match_count": response['Report']['MatchCount'],
@@ -269,7 +269,7 @@ class UrkundProvider(BaseProvider):
 
                         aux = {
                             "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA,
-                            "filename": r['filename'],
+                            "filename": res['filename'],
                             "urkund_code": urkund_code,
                             "urkund_message": response['Status']['Message']
                         }
@@ -277,7 +277,7 @@ class UrkundProvider(BaseProvider):
                         new_info['processed_external_ids']['errors'].append(aux)
                     else:
                         # put in next check
-                        new_info['external_ids'].append(r)
+                        new_info['external_ids'].append(res)
 
             # decide if all requests are processed
             num_errors = len(new_info['processed_external_ids']['errors'])
@@ -298,8 +298,8 @@ class UrkundProvider(BaseProvider):
                 max_significance = 0
 
                 for correct in new_info['processed_external_ids']['corrects']:
-                    if correct["significance"] > max_significance:
-                        max_significance = correct["significance"]
+                    if (correct["significance"] / 100) > max_significance:
+                        max_significance = correct["significance"] / 100
 
                     audit.add_comparison(comparison_id=correct['external_id'], result=correct['significance'],
                                          extra_info=correct)
@@ -314,4 +314,3 @@ class UrkundProvider(BaseProvider):
                 key = "tukrund_check_data_{}".format(uuid.uuid4())
                 notification = result.NotificationTask(key, countdown=info['countdown']*60, info=info)
                 self.update_or_create_notification(notification)
-

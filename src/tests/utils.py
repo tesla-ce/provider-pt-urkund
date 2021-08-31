@@ -12,13 +12,23 @@
 #
 #      You should have received a copy of the GNU Affero General Public License
 #      along with this program.  If not, see <https://www.gnu.org/licenses/>.
+'''
+Test util module
+'''
 import uuid
 from datetime import datetime
 import os
 import base64
 
 
-def get_request(filename, mimetype, learner_id = None):
+def get_request(filename, mimetype, learner_id=None):
+    '''
+    Get request
+    :param filename:
+    :param mimetype:
+    :param learner_id:
+    :return:
+    '''
     from tesla_ce_provider.models.base import Request
 
     if learner_id is None:

@@ -61,6 +61,11 @@ class Submissions:
 
     @staticmethod
     def get_message_from_submission_error(error):
+        """
+        Get message from submissione error
+        :param error:
+        :return:
+        """
         explication_errors = {
             3: "The submitted document does not contain enough text to be analysed",
             4: "Document submitted after deadline",
@@ -73,4 +78,3 @@ class Submissions:
             return explication_errors[int(error)]
 
         return "Error not explained"
-

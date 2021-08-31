@@ -13,13 +13,14 @@
 #      You should have received a copy of the GNU Affero General Public License
 #      along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """ TeSLA CE Urkund Plagiarism utility module """
+import base64
 import json
 import os
-import magic
 import tempfile
 import shutil
+import magic
 from tesla_ce_provider import message
-import base64
+
 
 FILENAME_CONTENT = 'content.txt'
 TYPE_ASSIGN = 'assign'
@@ -29,12 +30,18 @@ TYPE_FORUM_POST = 'forum_post'
 
 
 def get_decompress_files(sample_data, filename):
+    """
+    Get decompress file content
+    :param sample_data:
+    :param filename:
+    :return:
+    """
     # decompress files
-    fp = tempfile.NamedTemporaryFile()
-    fp.write(sample_data)
-    fp.seek(0)
+    file_p = tempfile.NamedTemporaryFile()
+    file_p.write(sample_data)
+    file_p.seek(0)
 
-    tmp_filename = fp.name
+    tmp_filename = file_p.name
     extract_directory = tempfile.TemporaryDirectory()
     # read data from file
     extension = filename.split('.')[-1]
@@ -169,7 +176,7 @@ def get_sample_tree_files(sample_data, context, mimetype, filename, level, max_r
             "content": sample_data
         })
     else:
-        # todo: try extract text
+        # TODO: try extract text
         files_structure.append({
             "filename": filename,
             "mimetype": mimetype,
@@ -203,7 +210,7 @@ def check_sample_file(sample, max_recursive_level, accepted_mimetypes=None, comp
 
     try:
         sample_mimetype = sample.data.split(',')[0].split(';')[0].split(':')[1]
-    except Exception:
+    except IndexError:
         return {
             'valid': False,
             'msg': "Mimetype is not in sample base64 data",
