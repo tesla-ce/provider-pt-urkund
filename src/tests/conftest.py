@@ -45,30 +45,12 @@ def urkund_provider(tesla_ce_base_provider):
     logger = getLogger('urkund Tests')
     tesla_ce_base_provider.set_logger(logger.info)
 
-    urkund_user = os.getenv('URKUND_USER', None)
-    urkund_pass = os.getenv('URKUND_PASSWORD', None)
-
-    if urkund_user is None or urkund_pass is None:
-        pytest.fail("Missing Urkund credentials. Set env URKUND_USER and URKUND_PASSWORD.")
-
-    urkund_unit = os.getenv('URKUND_UNIT', None)
-    if urkund_unit is None:
-        pytest.fail("Missing unit data. Set env URKUND_UNIT.")
-
-    urkund_organization = os.getenv('URKUND_ORGANIZATION', None)
-    urkund_sub_organization = os.getenv('URKUND_SUBORGANIZATION', None)
-    urkund_default_email_receiver = os.getenv('URKUND_DEFAULT_EMAIL_RECEIVER', 'noreply@tesla-project.eu')
-
-    options = {
-        'user': urkund_user,
-        'password': urkund_pass,
-        'unit': urkund_unit,
-        'organization': urkund_organization,
-        'sub_organization': urkund_sub_organization,
-        'default_email_receiver': urkund_default_email_receiver
-    }
-
-    tesla_ce_base_provider.set_options(options=options)
+    tesla_ce_base_provider.set_credential('URKUND_USER', os.getenv('URKUND_USER', None))
+    tesla_ce_base_provider.set_credential('URKUND_PASSWORD', os.getenv('URKUND_PASSWORD', None))
+    tesla_ce_base_provider.set_credential('URKUND_UNIT',os.getenv('URKUND_UNIT', None))
+    tesla_ce_base_provider.set_credential('URKUND_ORGANIZATION', os.getenv('URKUND_ORGANIZATION', None))
+    tesla_ce_base_provider.set_credential('URKUND_SUBORGANIZATION', os.getenv('URKUND_SUBORGANIZATION', None))
+    tesla_ce_base_provider.set_credential('URKUND_DEFAULT_EMAIL_RECEIVER', os.getenv('URKUND_DEFAULT_EMAIL_RECEIVER', 'noreply@tesla-project.eu'))
 
     return tesla_ce_base_provider
 

@@ -54,13 +54,10 @@ class UrkundProvider(BaseProvider):
 
     accepted_mimetypes = accepted_mimetypes_urkund + compressed_mimetypes
 
+    _required_credentials = ['URKUND_USER', 'URKUND_PASSWORD', 'URKUND_UNIT', 'URKUND_ORGANIZATION',
+                             'URKUND_SUBORGANIZATION', 'URKUND_DEFAULT_EMAIL_RECEIVER']
+
     config = {
-        'user': os.getenv('URKUND_USER', None),
-        'password': os.getenv('URKUND_PASSWORD', None),
-        'unit': os.getenv('URKUND_UNIT', None),
-        'organization': os.getenv('URKUND_ORGANIZATION', None),
-        'sub_organization': os.getenv('URKUND_SUBORGANIZATION', None),
-        'default_email_receiver': os.getenv('URKUND_DEFAULT_EMAIL_RECEIVER', None),
         'compression_recursive_extract_level': 3,
         'timeout_retries': 0,
         'max_timeout_retries': 3,
@@ -76,9 +73,11 @@ class UrkundProvider(BaseProvider):
         :return:
         """
         if self._urkund_lib is None:
-            self._urkund_lib = UrkundLib(user=self.config['user'], password=self.config['password'],
-                                         unit=self.config['unit'], organization=self.config['organization'],
-                                         sub_organization=self.config['sub_organization'])
+            self._urkund_lib = UrkundLib(user=self.credentials['URKUND_USER'],
+                                         password=self.credentials['URKUND_PASSWORD'],
+                                         unit=self.credentials['URKUND_UNIT'],
+                                         organization=self.credentials['URKUND_ORGANIZATION'],
+                                         sub_organization=self.credentials['URKUND_SUBORGANIZATION'])
 
         return self._urkund_lib
 
@@ -116,7 +115,7 @@ class UrkundProvider(BaseProvider):
                                              message_code=sample_check['code'])
 
         # sample is valid proceed to sent to urkund
-        receiver = self._get_urkund_lib().receivers.get_by_email(self.config['default_email_receiver'])
+        receiver = self._get_urkund_lib().receivers.get_by_email(self.credentials['URKUND_DEFAULT_EMAIL_RECEIVER'])
 
         idx = 0
         info = {
@@ -160,7 +159,7 @@ class UrkundProvider(BaseProvider):
                             get_message_from_submission_error(response['Status']['ErrorCode'])
 
                         aux = {
-                            "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA,
+                            "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA.value,
                             "filename": t_file['filename'],
                             "urkund_code": urkund_code,
                             "urkund_message": response['Status']['Message']
@@ -169,7 +168,7 @@ class UrkundProvider(BaseProvider):
 
                     else:
                         aux = {
-                            "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA,
+                            "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA.value,
                             "filename": t_file['filename'],
                             "urkund_code": None,
                             "urkund_message": response['Status']['Message']
@@ -181,7 +180,7 @@ class UrkundProvider(BaseProvider):
                     self.config['timeout_retries'] += 1
                     if self.config['timeout_retries'] >= self.config['max_timeout_retries']:
                         aux = {
-                            "code": message.provider.Provider.PROVIDER_EXTERNAL_SERVICE_TIMEOUT,
+                            "code": message.provider.Provider.PROVIDER_EXTERNAL_SERVICE_TIMEOUT.value,
                             "filename": t_file['filename'],
                             "urkund_code": None,
                             "urkund_message": None
@@ -192,7 +191,7 @@ class UrkundProvider(BaseProvider):
 
                 except MediaTypeNotSupported:
                     aux = {
-                        "code": message.provider.Provider.PROVIDER_INVALID_MIMETYPE,
+                        "code": message.provider.Provider.PROVIDER_INVALID_MIMETYPE.value,
                         "filename": t_file['filename'],
                         "urkund_code": None,
                         "urkund_message": None
@@ -200,7 +199,7 @@ class UrkundProvider(BaseProvider):
                     info['processed_external_ids']['errors'].append(aux)
                 except (BadRequest, RequestTooLarge, BaseUrkundLibException):
                     aux = {
-                        "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA,
+                        "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA.value,
                         "filename": t_file['filename'],
                         "urkund_code": None,
                         "urkund_message": None
@@ -209,7 +208,7 @@ class UrkundProvider(BaseProvider):
 
         # check if there is any sent document valid to check in the future
         if len(info['external_ids']) == 0:
-            return result.VerificationResult(False, message_code=message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA)
+            return result.VerificationResult(False, message_code=message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA.value)
 
         key = "tukrund_check_data_{}".format(uuid.uuid4())
         notification = result.NotificationTask(key, countdown=info['countdown']*60, info=info)
@@ -268,7 +267,7 @@ class UrkundProvider(BaseProvider):
                             get_message_from_submission_error(response['Status']['ErrorCode'])
 
                         aux = {
-                            "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA,
+                            "code": message.provider.Provider.PROVIDER_INVALID_SAMPLE_DATA.value,
                             "filename": res['filename'],
                             "urkund_code": urkund_code,
                             "urkund_message": response['Status']['Message']

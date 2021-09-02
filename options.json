@@ -15,5 +15,6 @@
   "inverted_polarity": true,
   "options_schema": {}
   },
-  "required": []
+  "required": [],
+  "credentials": ['URKUND_USER', 'URKUND_PASSWORD', 'URKUND_UNIT', 'URKUND_ORGANIZATION', 'URKUND_SUBORGANIZATION', 'URKUND_DEFAULT_EMAIL_RECEIVER']
 }
