@@ -59,8 +59,12 @@ ENV PROVIDER_VERSION=$TESLA_CE_PROVIDER_VERSION
 RUN addgroup -g 2000 -S celery && \
     adduser -u 1000 -S celery -G celery
 
+ADD docker/check_health.sh /venv/bin/check_health.sh
+RUN chmod +x /venv/bin/check_health.sh
+
 USER celery
 
 CMD ["/venv/bin/celery", "-A", "tesla_ce_provider", "worker", "-l", "warning", "-O", "fair"]
-HEALTHCHECK --start-period=15s --retries=3 CMD "/venv/bin/celery -A tesla_ce_provider inspect ping -d celery@\$HOSTNAME --timeout=30"
+HEALTHCHECK --start-period=15s --retries=3 CMD "/venv/bin/check_health.sh"
+
 ENTRYPOINT ["/venv/bin/python"]

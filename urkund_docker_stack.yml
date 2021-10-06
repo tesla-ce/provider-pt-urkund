@@ -14,12 +14,12 @@ services:
     environment:
       ROLE_ID_FILE: "/run/secrets/ROLE_ID"
       SECRET_ID_FILE: "/run/secrets/SECRET_ID"
-      URKUND_USER: URKUND_USER
-      URKUND_PASSWORD: URKUND_PASSWORD
-      URKUND_ORGANIZATION: URKUND_ORGANIZATION
-      URKUND_SUBORGANIZATION: URKUND_SUBORGANIZATION
-      URKUND_UNIT: URKUND_UNIT
-      URKUND_DEFAULT_EMAIL_RECEIVER: URKUND_DEFAULT_EMAIL_RECEIVER@tesla-ce.eu
+      URKUND_USER_FILE: "/run/secrets/URKUND_USER"
+      URKUND_PASSWORD_FILE: "/run/secrets/URKUND_PASSWORD"
+      URKUND_ORGANIZATION_FILE: "/run/secrets/URKUND_ORGANIZATION"
+      URKUND_SUBORGANIZATION_FILE: "/run/secrets/URKUND_SUBORGANIZATION"
+      URKUND_UNIT_FILE: "/run/secrets/URKUND_UNIT"
+      URKUND_DEFAULT_EMAIL_RECEIVER_FILE: "/run/secrets/URKUND_DEFAULT_EMAIL_RECEIVER"
       API_URL: https://demo.tesla-project.eu
       VERIFY_SSL: 0
       SENTRY_ENABLED: 1
@@ -30,13 +30,35 @@ services:
         target: ROLE_ID
       - source: URKUND_SECRET_ID
         target: SECRET_ID
-
+      - source: URKUND_USER
+        target: URKUND_USER
+      - source: URKUND_PASSWORD
+        target: URKUND_PASSWORD
+      - source: URKUND_ORGANIZATION
+        target: URKUND_ORGANIZATION
+      - source: URKUND_SUBORGANIZATION
+        target: URKUND_SUBORGANIZATION
+      - source: URKUND_UNIT
+        target: URKUND_UNIT
+      - source: URKUND_DEFAULT_EMAIL_RECEIVER
+        target: URKUND_DEFAULT_EMAIL_RECEIVER
 secrets:
   URKUND_ROLE_ID:
     file: ./secrets/URKUND_ROLE_ID
   URKUND_SECRET_ID:
     file: ./secrets/URKUND_SECRET_ID
-
+  URKUND_USER:
+    file: ./secrets/URKUND_USER
+  URKUND_PASSWORD:
+    file: ./secrets/URKUND_PASSWORD
+  URKUND_ORGANIZATION:
+    file: ./secrets/URKUND_ORGANIZATION
+  URKUND_SUBORGANIZATION:
+    file: ./secrets/URKUND_SUBORGANIZATION
+  URKUND_UNIT:
+    file: ./secrets/URKUND_UNIT
+  URKUND_DEFAULT_EMAIL_RECEIVER:
+    file: ./secrets/URKUND_DEFAULT_EMAIL_RECEIVER
 networks:
   tesla_public:
     external: true
