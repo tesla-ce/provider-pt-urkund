@@ -73,11 +73,15 @@ class UrkundProvider(BaseProvider):
         :return:
         """
         if self._urkund_lib is None:
-            self._urkund_lib = UrkundLib(user=self.credentials['URKUND_USER'],
-                                         password=self.credentials['URKUND_PASSWORD'],
-                                         unit=self.credentials['URKUND_UNIT'],
-                                         organization=self.credentials['URKUND_ORGANIZATION'],
-                                         sub_organization=self.credentials['URKUND_SUBORGANIZATION'])
+            suborganization = self.credentials['URKUND_SUBORGANIZATION']
+            if self.credentials['URKUND_SUBORGANIZATION'] is not None:
+                suborganization = suborganization.strip()
+
+            self._urkund_lib = UrkundLib(user=self.credentials['URKUND_USER'].strip(),
+                                         password=self.credentials['URKUND_PASSWORD'].strip(),
+                                         unit=self.credentials['URKUND_UNIT'].strip(),
+                                         organization=self.credentials['URKUND_ORGANIZATION'].strip(),
+                                         sub_organization=suborganization)
 
         return self._urkund_lib
 
