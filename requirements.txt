@@ -16,7 +16,7 @@ cached-property==1.5.2
     # via
     #   kombu
     #   tesla-ce-provider-pt-urkund (setup.py)
-celery==5.0.5
+celery==5.2.2
     # via
     #   tesla-ce-provider
     #   tesla-ce-provider-pt-urkund (setup.py)
