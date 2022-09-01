@@ -49,7 +49,8 @@ RUN set -ex \
             jpeg \
             libxml2 \
             libxslt \
-            expat
+            expat \
+            libmagic
 
 # Prepare environment
 ENV PROVIDER_CLASS=urkund.UrkundProvider
