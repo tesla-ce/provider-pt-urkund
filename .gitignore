@@ -199,3 +199,4 @@ dmypy.json
 
 lib_old
 *.sqlite
+.env_beta

@@ -98,7 +98,8 @@ def get_sample_tree_files(sample_data, context, mimetype, filename, level, max_r
         content_raw_text = ''
 
         if os.path.isfile(extract_directory.name+os.path.sep+FILENAME_CONTENT):
-            content = json.loads(extract_directory.name+os.path.sep+FILENAME_CONTENT)
+            f = open (extract_directory.name+os.path.sep+FILENAME_CONTENT, "r")
+            content = json.loads(f.read())
 
             if context.get('type') == TYPE_ASSIGN_ONLINE or TYPE_ASSIGN:
                 content_raw_text = content.get('online_text')
@@ -113,7 +114,7 @@ def get_sample_tree_files(sample_data, context, mimetype, filename, level, max_r
                 "filename": context.get('type')+'.txt',
                 "mimetype": 'text/plain',
                 "status": "ACCEPTED",
-                "content": content_raw_text
+                "content": content_raw_text.encode('utf-8')
             })
 
         # check if sample has attachments
