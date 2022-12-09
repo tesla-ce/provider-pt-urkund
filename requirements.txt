@@ -20,7 +20,7 @@ celery==5.0.5
     # via
     #   tesla-ce-provider
     #   tesla-ce-provider-pt-urkund (setup.py)
-certifi==2021.5.30
+certifi==2022.12.7
     # via
     #   requests
     #   sentry-sdk
