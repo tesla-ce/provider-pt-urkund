@@ -36,7 +36,7 @@ setuptools.setup(
         "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
         "Operating System :: POSIX :: Linux",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.8',
     package_data={
         '': ['*.cfg', 'VERSION'],
         'urkund': [
