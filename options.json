@@ -1,7 +1,7 @@
 {
   "instrument": 5,
   "acronym": "turkund",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "url": "https://github.com/tesla-ce/provider-pt-urkund",
   "image": "teslace/provider-pt-urkund:edge",
   "name": "TeSLA Urkund Plagiarism Tool",
