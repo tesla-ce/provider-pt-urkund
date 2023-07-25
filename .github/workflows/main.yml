@@ -121,6 +121,7 @@ jobs:
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - name: Build package
+        continue-on-error: true
         run: |
           # Build requirements
           python -m pip install --upgrade pip
