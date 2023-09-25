@@ -34,7 +34,7 @@ click-repl==0.3.0
     # via celery
 deprecation==2.1.0
     # via tesla-ce-client
-gevent==23.7.0
+gevent==23.9.1
     # via tesla-ce-provider
 greenlet==2.0.2
     # via gevent
