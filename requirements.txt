@@ -70,7 +70,7 @@ tzdata==2023.3
     # via
     #   backports-zoneinfo
     #   celery
-urllib3==2.0.4
+urllib3==2.0.6
     # via
     #   requests
     #   sentry-sdk
